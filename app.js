@@ -60,14 +60,9 @@ passport.deserializeUser(User.deserializeUser())
 app.use((req, res, next)=>{
     res.locals.success=req.flash('success');
     res.locals.error=req.flash('error')
+    res.locals.currentUser=req.user;
     next();
 })
-
-// app.get('/fakeuser', async (req, res)=>{
-//     const user=new User({email: 'nani@gmail.com', username:'nani'})
-//     const newUser= await User.register(user, 'monkey')
-//     res.send(newUser)
-// })
 
 app.use('/', userRoutes)
 app.use('/campgrounds', campgroundRoutes)
